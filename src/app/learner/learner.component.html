@@ -1,3 +1,61 @@
-<p>
-  learner works!
-</p>
+<mat-tab-group style="width: 90vw;">
+  <mat-tab label="Learner Details">
+    <div style="overflow:hidden; margin-top: 20px;">
+      <mat-spinner diameter="100" style="margin: 0 auto;" *ngIf="!learner"></mat-spinner>
+    </div>
+    <div class="example-container" *ngIf="learner">
+      <mat-form-field [floatLabel]="options.value.floatLabel">
+        <mat-label>First Name</mat-label>
+        <input matInput readonly value="{{ learner.firstName }}">
+      </mat-form-field>
+
+      <mat-form-field [floatLabel]="options.value.floatLabel">
+        <mat-label>Last Name</mat-label>
+        <input matInput readonly value="{{ learner.lastName }}">
+      </mat-form-field>
+
+      <mat-form-field [floatLabel]="options.value.floatLabel">
+        <mat-label>Email</mat-label>
+        <input matInput readonly value="{{ learner.email }}">
+      </mat-form-field>
+
+      <mat-form-field [floatLabel]="options.value.floatLabel">
+        <mat-label>Age</mat-label>
+        <input matInput readonly value="{{ learner.age }}">
+      </mat-form-field>
+    </div>
+  </mat-tab>
+  <mat-tab label="Enrolments">
+    <div style="overflow:hidden; margin-top: 20px;">
+      <mat-spinner diameter="100" style="margin: 0 auto;" *ngIf="!learner"></mat-spinner>
+    </div>
+    <table mat-table [dataSource]="learner.enrolments" class="mat-elevation-z8" style="width: 90vw;" *ngIf="learner">
+      <!-- Title Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> Title </th>
+        <td mat-cell *matCellDef="let enrolment"> {{ enrolment.course.title }} </td>
+      </ng-container>
+
+      <!-- Description Column -->
+      <ng-container matColumnDef="progress">
+        <th mat-header-cell *matHeaderCellDef> Progress </th>
+        <td mat-cell *matCellDef="let enrolment"> {{ enrolment.progress }}% </td>
+      </ng-container>
+
+      <!-- Date Column -->
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef> Enrolment Date </th>
+        <td mat-cell *matCellDef="let enrolment"> {{ enrolment.createdAt }} </td>
+      </ng-container>
+
+      <!-- Location Column -->
+      <ng-container matColumnDef="updatedAt">
+        <th mat-header-cell *matHeaderCellDef> Last Accessed </th>
+        <td mat-cell *matCellDef="let enrolment"> {{ enrolment.updatedAt }} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-tab>
+</mat-tab-group>
