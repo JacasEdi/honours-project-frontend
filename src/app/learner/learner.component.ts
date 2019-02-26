@@ -44,7 +44,8 @@ export class LearnerComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.getLearnerWithGraphql();
+    this.getLearnerWithRest();
+    // this.getLearnerWithGraphql();
   }
 
   getLearnerWithRest() {
